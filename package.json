@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Packages used:\r pg ---> used to pool of connections. Handles concurrent requests instead of one static connection to the db",
   "main": "server.ts",
+  "type": "module",
   "scripts": {
     "test": "NODE_ENV=test jest",
     "test:coverage": "NODE_ENV=test jest --coverage",
-    "start": "node server.js",
-    "dev": "node server.js",
+    "start": "ts-node --esm server.ts",
+    "dev": "ts-node server.ts",
     "lint": "standard --fix"
   },
   "keywords": [],
@@ -27,6 +28,7 @@
     "helmet": "^7.0.0",
     "pg": "^8.11.3",
     "standard": "^17.1.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "devDependencies": {

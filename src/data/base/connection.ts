@@ -1,6 +1,6 @@
-import { Pool } from 'pg';
-
-let pool: Pool;
+import pg from 'pg';
+const { Pool } = pg;
+let pool: pg.Pool;
 export const setupPool = () => {
   pool = new Pool({
     user: 'bitbot',

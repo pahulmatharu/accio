@@ -10,30 +10,9 @@ class KitRepository extends BaseRepository<StandardPayloadResponse<Kit>> {
     this.connection = dbConnection;
   }
 
-  async get(id: string): Promise<StandardPayloadResponse<Kit>> {
-    try {
-      const result = await this.connection.query('Select id, label_id, shipping_tracking_code FROM kits WHERE id = $1', [id]);
-      // TODO: fix this nonsense;
-      if(result.rowCount > 0) {
-        return {
-          isSuccessful: true,
-          payload: result.rows[0]
-        }
-      }
-      return {
-        isSuccessful: true
-      }
-    } catch (e) {
-      // TODO: add logging
-      return {
-        isSuccessful: false,
-        error: [],
-      }
-    }
-  }
   async filterShippingCode(value: string): Promise<StandardPayloadResponse<Kit[]>> {
     try {
-      const result = await this.connection.query('Select id, label_id, shipping_tracking_code FROM kits WHERE shipping_tracking_code = $1', [value]);
+      const result = await this.connection.query(`Select id, label_id, shipping_tracking_code FROM public."Kits" where position('${value}' in shipping_tracking_code)>0`);
       return {
         isSuccessful: true,
         payload: result.rows
@@ -51,7 +30,7 @@ class KitRepository extends BaseRepository<StandardPayloadResponse<Kit>> {
   }
   async filterLabelId(value: string): Promise<StandardPayloadResponse<Kit[]>> {
     try {
-      const result = await this.connection.query('Select id, label_id, shipping_tracking_code FROM kits WHERE label_id = $1', [value]);
+      const result = await this.connection.query(`Select id, label_id, shipping_tracking_code FROM public."Kits" where position('${value}' in label_id)>0`);
       return {
         isSuccessful: true,
         payload: result.rows
