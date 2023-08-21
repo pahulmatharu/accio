@@ -1,11 +1,16 @@
 import { Pool } from 'pg';
 
-const pool = new Pool({
-  user: 'bitbot',
-  host: 'localhost',
-  database: 'Bitbot',
-  password: 'bitbot',
-  port: 5432,
-});
-
-export default pool;
+let pool: Pool;
+export const setupPool = () => {
+  pool = new Pool({
+    user: 'bitbot',
+    host: 'localhost',
+    database: 'Bitbot',
+    password: 'bitbot',
+    port: 5432,
+  });
+  return pool;
+}
+export const GetPool = () => {
+  return pool;
+}

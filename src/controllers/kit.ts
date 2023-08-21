@@ -1,12 +1,16 @@
 import express from 'express';
 import KitsService from '../services/kit-service';
+import { GetKitRepository } from '../data/base/setup';
 const controller = express.Router();
 
-const kitsService = new KitsService();
+const kitsService: KitsService = new KitsService(GetKitRepository());
 
-controller.get('/', async (req, res) => {
+controller.get('/:value', async (req, res) => {
+  const {
+    params: { value }
+  } = req
   try {
-    const users = await kitsService.search()
+    const users = await kitsService.search(value);
     res.json(users);
   } catch (err: any) {
     res.status(400).send(err.message);

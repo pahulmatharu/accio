@@ -5,8 +5,11 @@ import helmet from 'helmet';
 import compression from 'compression';
 import routes from './controllers';
 import config from './config';
+import setupSingletons from './data/base/setup';
 
+setupSingletons();
 const app = express();
+
 app.use(cookieParser());
 app.use(compression());
 app.use(
