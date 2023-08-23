@@ -4,6 +4,7 @@
 3. In PgAdmin (or use psql) add New database called database: 'Bitbot', password: 'bitbot'.
 4. Create new role in pgadmin( or psql) called: bitbot and set to read/write permissions
 5. Make sure port is 5432
+  a. Insert Data. Currently not setup to ingest data
 6. Run project using: npm run start
 7. Get your kitsssss
 
